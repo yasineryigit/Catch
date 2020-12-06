@@ -47,34 +47,7 @@ public class MainActivity extends AppCompatActivity {
         score=0;
         sayac=5;
 
-        hideImage();
-
-        //Geri sayım başladı
-        h = new Handler();
-        r = new Runnable() {
-            @Override
-            public void run() {
-                sayac--;
-                if(sayac>0){
-                        timerText.setText("Time: " + sayac);
-                        System.out.println(sayac);
-
-                }else if(sayac==0){//süre bittiğinde
-                    timerText.setText("Finished!");
-                    h2.removeCallbacks(r2);
-                    clearImages();
-                    sor();
-                }
-                h.postDelayed(r, 1000);
-            }};
-        h.post(r);
-
-
-
-
-
-
-
+        oynat();
 
     }
 
@@ -120,7 +93,9 @@ public class MainActivity extends AppCompatActivity {
         sor.setPositiveButton("Oyna", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                oynat();
+                Intent i1 = getIntent();
+                finish();
+                startActivity(i1);
 
             }
         });
@@ -136,8 +111,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void oynat(){
-        Intent i1 = getIntent();
-        finish();
-        startActivity(i1);
+
+        hideImage();
+
+        //Geri sayım başladı
+        h = new Handler();
+        r = new Runnable() {
+            @Override
+            public void run() {
+                sayac--;
+                if(sayac>0){
+                    timerText.setText("Time: " + sayac);
+                    System.out.println(sayac);
+
+                }else if(sayac==0){//süre bittiğinde
+                    timerText.setText("Finished!");
+                    h2.removeCallbacks(r2);
+                    clearImages();
+                    sor();
+                }
+                h.postDelayed(r, 1000);
+            }};
+        h.post(r);
+
+
+
+
     }
 }
